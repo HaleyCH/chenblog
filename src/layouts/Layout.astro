@@ -22,6 +22,8 @@ const {
   image = "/static/blog-placeholder.png",
   is_cover = false,
 } = Astro.props;
+
+const paddingClass = " px-8 md:px-10 lg:px-12 xl:px-16";
 ---
 
 <html lang="en">
@@ -78,7 +80,8 @@ const {
     <div class="flex min-h-[100dvh] w-full flex-1 flex-col items-center">
       <!-- Header -->
       <header
-        class="mx-auto my-10 flex w-full max-w-7xl items-center justify-between px-4 md:px-10"
+        class={"mx-auto my-10 flex w-full max-w-7xl items-center justify-between" +
+          paddingClass}
       >
         {
           Astro.props.is_cover ? (
@@ -93,17 +96,18 @@ const {
       </header>
 
       <!-- Main Slot -->
-      <main class="flex w-full flex-1 items-center justify-center">
-        <div
-          class="prose mx-auto my-10 w-full max-w-7xl break-words px-4 md:px-10"
-        >
+      <main
+        class={"flex w-full flex-1 items-center justify-center" + paddingClass}
+      >
+        <div class="prose mx-auto my-10 w-full max-w-7xl break-words">
           <slot />
         </div>
       </main>
 
       <!-- Footer -->
       <footer
-        class="mx-auto my-10 flex w-full max-w-7xl items-center justify-between px-4 md:px-10"
+        class={"mx-auto my-10 flex w-full max-w-7xl items-center justify-between " +
+          paddingClass}
       >
         {
           Astro.props.date ? (
