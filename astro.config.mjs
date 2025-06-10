@@ -14,7 +14,7 @@ import rehypeKatex from "rehype-katex";
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
-  base: "chenblog",
+  base: "",
   integrations: [mdx(), sitemap(), tailwind({ nesting: true })],
   markdown: {
     shikiConfig: {
