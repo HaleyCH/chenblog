@@ -28,9 +28,8 @@ const start = (currentPage - 1) * POSTS_PER_PAGE;
 const end = start + POSTS_PER_PAGE;
 const pagedPosts = gossips.slice(start, end);
 
-const prev_url = currentPage > 1 ? `/gossips/${currentPage - 1}` : null;
-const next_url =
-  currentPage < totalPages ? `/gossips/${currentPage + 1}` : null;
+const prev_url = currentPage > 1 ? `/gossips/${currentPage - 1}` : "";
+const next_url = currentPage < totalPages ? `/gossips/${currentPage + 1}` : "";
 ---
 
 <Layout
