@@ -2,7 +2,11 @@
 
 **陈的博客** 是一个用 [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/) 搭建的极简博客，广泛参考了[miniblog](!https://miniblog.nicholasly.com).
 
-**特点**
+![pic1](doc/pic1.png)
+
+[在线Demo](!http://chenblogdemo.hluvmiku.tech)
+
+## 特点
 
 - 支持 [Markdown](https://www.markdownguide.org/) 与 [MDX](https://mdxjs.com/)
 - 使用 [Shiki](https://github.com/shikijs/shiki) 实现代码高亮
