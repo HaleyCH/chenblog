@@ -23,7 +23,7 @@ const recentPosts = posts.slice(0, 3);
         class="mb-6 h-96 w-8 object-cover"
       />
       <h1 class="mt-4 flex flex-row items-start gap-2 text-2xl">
-        <span class="font-thin"><span class="text-red-700">陈</span>的</span>
+        <span class="font-light"><span class="text-red-700">陈</span>的</span>
         <div class="flex flex-col font-bold underline">
           <a href="/posts/" class="text-black">博客</a>
           <a href="/gossips/" class="text-black">杂谈随记</a>
@@ -53,7 +53,7 @@ const recentPosts = posts.slice(0, 3);
                 <span class="text-base group-hover:underline">
                   {post.data.title}
                 </span>
-                <span class="text-nowrap text-base font-thin text-gray-500">
+                <span class="text-nowrap text-base font-light text-gray-500">
                   {formatDate(post.data.date)}
                 </span>
               </a>
@@ -61,7 +61,7 @@ const recentPosts = posts.slice(0, 3);
           ))
         }
         <div
-          class="mt-10 flex flex-row items-center gap-4 text-sm font-thin underline"
+          class="mt-10 flex flex-row items-center gap-4 text-sm font-light underline"
         >
           <a href="/posts/" class="text-gray-500 no-underline">博客 </a>
           <a href="/gossips/" class="text-gray-500 no-underline">杂谈随记 </a>
