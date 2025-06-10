@@ -1,0 +1,73 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Layout from "../layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+import { formatDate, getAvailablePosts, sortPostsByDate } from "../lib/utils";
+const collection = await getCollection("posts");
+const posts = sortPostsByDate(getAvailablePosts(collection));
+
+//  筛选前3个posts
+const recentPosts = posts.slice(0, 3);
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} is_cover={true}>
+  <main
+    class="grid h-[70%] w-full max-w-5xl items-center gap-2 md:grid-cols-2 md:gap-4 lg:gap-8"
+  >
+    <!-- 左侧栏 -->
+    <section class="mb-20 flex flex-col items-center justify-center">
+      <img
+        src="/src/assets/cover.jpg"
+        alt="avatar"
+        class="mb-6 h-96 w-8 object-cover"
+      />
+      <h1 class="mt-4 flex flex-row items-start gap-2 text-2xl">
+        <span class="font-thin"><span class="text-red-700">陈</span>的</span>
+        <div class="flex flex-col font-bold underline">
+          <a href="/posts/" class="text-black">博客</a>
+          <a href="/gossips/" class="text-black">杂谈随记</a>
+          <a href="/resume/" class="text-black">科研</a>
+        </div>
+      </h1>
+    </section>
+
+    <!-- 右侧内容 -->
+    <section
+      class="flex h-fit flex-col justify-start gap-8 md:mb-20 md:ml-24 md:mr-10 md:gap-10 lg:gap-20"
+    >
+      <p class="max-w-md text-sm leading-relaxed text-gray-700">
+        发挥才智，则锋芒毕露；凭借感情，则流于世俗；坚持己见，则多方掣肘。<span
+          class="text-green-700">总之，人世难居。</span
+        >
+      </p>
+
+      <ul class="flex flex-col gap-4">
+        {
+          recentPosts.map((post) => (
+            <li>
+              <a
+                href={`/posts/${post.slug}`}
+                class="group flex flex-row items-center justify-between gap-3 text-black"
+              >
+                <span class="text-base group-hover:underline">
+                  {post.data.title}
+                </span>
+                <span class="text-nowrap text-base font-thin text-gray-500">
+                  {formatDate(post.data.date)}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+        <div
+          class="mt-10 flex flex-row items-center gap-4 text-sm font-thin underline"
+        >
+          <a href="/posts/" class="text-gray-500 no-underline">博客 </a>
+          <a href="/gossips/" class="text-gray-500 no-underline">杂谈随记 </a>
+          <a href="/resume/" class="text-gray-500 no-underline">科研</a>
+        </div>
+      </ul>
+    </section>
+  </main>
+</Layout>

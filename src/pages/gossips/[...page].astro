@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate, getDisplayPosts } from "../../lib/utils";
+
+// 必须导出 getStaticPaths
+export async function getStaticPaths() {
+  // 在这里重新获取所有 gossips
+  const collection = await getCollection("gossips");
+  const gossips = getDisplayPosts(collection);
+  const totalPages = Math.ceil(gossips.length / POSTS_PER_PAGE);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+  }));
+}
+
+// 页面脚本
+const collection = await getCollection("gossips");
+const gossips = getDisplayPosts(collection);
+const totalPages = Math.ceil(gossips.length / POSTS_PER_PAGE);
+
+const { page } = Astro.params;
+const currentPage = Number(Array.isArray(page) ? page[0] : page) || 1;
+
+const start = (currentPage - 1) * POSTS_PER_PAGE;
+const end = start + POSTS_PER_PAGE;
+const pagedPosts = gossips.slice(start, end);
+
+const prev_url = currentPage > 1 ? `/gossips/${currentPage - 1}` : null;
+const next_url =
+  currentPage < totalPages ? `/gossips/${currentPage + 1}` : null;
+---
+
+<Layout
+  title={SITE_TITLE}
+  description={SITE_DESCRIPTION}
+  prev_url={prev_url}
+  next_url={next_url}
+  prev_title={"《" + gossips[start - 1]?.data.title + "》等"}
+  next_title={"《" + gossips[end]?.data.title + "》等"}
+>
+  <main class="flex items-center justify-center">
+    <ul class="min-w-2xl flex max-w-2xl flex-1 flex-col gap-1.5 px-4 py-8">
+      {
+        pagedPosts.map((post) => (
+          <li>
+            <a
+              href={`/gossips/${post.slug}`}
+              class="group flex justify-between gap-3 text-black hover:text-red-700"
+            >
+              <span class="group-hover:underline">
+                {post.data.pinned ? "【置顶】" : ""}
+                {post.data.title}
+              </span>
+              <span class="text-nowrap text-zinc-500">
+                {formatDate(post.data.date)}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

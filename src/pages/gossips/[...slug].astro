@@ -1,0 +1,47 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { formatDate, getDisplayPosts } from "../../lib/utils";
+
+export async function getStaticPaths() {
+  const gossips = await getCollection("gossips");
+  return gossips.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"gossips">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+// 获得prev和next文章的链接和标题
+
+const collection = await getCollection("gossips");
+const gossips = getDisplayPosts(collection);
+const currentIndex = gossips.findIndex((p) => p.slug === post.slug);
+const prevPost = currentIndex > 0 ? gossips[currentIndex - 1] : null;
+const nextPost =
+  currentIndex < gossips.length - 1 ? gossips[currentIndex + 1] : null;
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  prev_url={prevPost ? `/gossips/${prevPost.slug}` : undefined}
+  next_url={nextPost ? `/gossips/${nextPost.slug}` : undefined}
+  prev_title={prevPost ? "《" + prevPost.data.title + "》" : undefined}
+  next_title={nextPost ? "《" + nextPost.data.title + "》" : undefined}
+  date={formatDate(post.data.date)}
+>
+  <main
+    class="flex max-w-2xl flex-col items-start justify-center text-wrap md:mx-auto md:gap-6 md:px-4 md:py-8"
+  >
+    <h1 class="mb-5 text-2xl font-bold">
+      {post.data.title}
+    </h1>
+    <article class="prose prose-zinc max-w-none break-words">
+      <Content />
+    </article>
+  </main>
+</Layout>

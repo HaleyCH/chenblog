@@ -1,0 +1,151 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  className?: string;
+  prev_url?: string;
+  next_url?: string;
+  prev_title?: string;
+  next_title?: string;
+  is_cover?: boolean;
+  date?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title,
+  description,
+  image = "/static/blog-placeholder.png",
+  is_cover = false,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <!-- Global Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Font preloads -->
+    <link
+      rel="preload"
+      href="/fonts/geist-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-mono-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="stylesheet"
+      href="https://fastly.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+  </head>
+  <body class="min-h-[100dvh] bg-gray-100 font-kaiti">
+    <div class="flex min-h-[100dvh] w-full flex-1 flex-col items-center">
+      <!-- Header -->
+      <header
+        class="mx-auto my-10 flex w-full max-w-7xl items-center justify-between px-4 md:px-10"
+      >
+        {
+          Astro.props.is_cover ? (
+            <span class="text-base font-bold">·</span>
+          ) : (
+            <a href="/" class="text-base font-bold no-underline">
+              陈
+            </a>
+          )
+        }
+        <span class="text-base font-bold">··</span>
+      </header>
+
+      <!-- Main Slot -->
+      <main class="flex w-full flex-1 items-center justify-center">
+        <div
+          class="prose mx-auto my-10 w-full max-w-7xl break-words px-4 md:px-10"
+        >
+          <slot />
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer
+        class="mx-auto my-10 flex w-full max-w-7xl items-center justify-between px-4 md:px-10"
+      >
+        {
+          Astro.props.date ? (
+            <span class="text-sm font-thin">{Astro.props.date}</span>
+          ) : (
+            <span class="text-base font-bold">·</span>
+          )
+        }
+        <div
+          class="flex flex-col items-center justify-center gap-8 md:flex-row"
+        >
+          {
+            Astro.props.prev_url && (
+              <a
+                href={Astro.props.prev_url}
+                class="text-sm font-thin text-black underline hover:text-red-700"
+              >
+                前
+                {Astro.props.prev_title
+                  ? "：" + Astro.props.prev_title.slice(0, 10)
+                  : ""}
+              </a>
+            )
+          }
+          {
+            Astro.props.next_url && (
+              <a
+                href={Astro.props.next_url}
+                class="text-sm font-thin text-black underline hover:text-red-700"
+              >
+                后
+                {Astro.props.next_title
+                  ? "：" + Astro.props.next_title.slice(0, 10)
+                  : ""}
+              </a>
+            )
+          }
+        </div>
+        <span class="text-sm font-thin"
+          >由<span class="text-red-700">陈</span>设计</span
+        >
+      </footer>
+    </div>
+  </body>
+</html>
