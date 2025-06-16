@@ -52,6 +52,7 @@ const next_url = currentPage < totalPages ? `/gossips/${currentPage + 1}` : "";
               <span class="group-hover:underline">
                 {post.data.pinned ? "【置顶】" : ""}
                 {post.data.title}
+                {post.data.password ? "（加密）" : ""}
               </span>
               <span class="text-nowrap text-zinc-500">
                 {formatDate(post.data.date)}

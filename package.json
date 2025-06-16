@@ -1,7 +1,7 @@
 {
   "name": "chenblog",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -17,8 +17,11 @@
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
+    "@expressive-code/plugin-collapsible-sections": "^0.41.2",
+    "@expressive-code/plugin-line-numbers": "^0.41.2",
     "@r4ai/remark-callout": "^0.6.2",
     "astro": "^5.1.0",
+    "astro-expressive-code": "^0.41.2",
     "katex": "^0.16.22",
     "rehype-callouts": "^2.1.0",
     "rehype-katex": "^7.0.1",

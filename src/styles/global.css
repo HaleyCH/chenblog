@@ -48,32 +48,16 @@
     p:has(> img:nth-child(6)):not(:has(> :not(img))) { column-count: 4; }
 
     h1 {
-      @apply my-4 text-xl font-bold dark:text-white;
-    }
-    h1::before {
-      @apply inline-block h-6 text-red-700 mr-2 text-lg;
-      content: "#";
+      @apply my-4 text-2xl font-bold dark:text-white mt-10 text-red-700;
     }
     h2 {
-      @apply my-4 text-lg font-bold dark:text-white;
-    }
-    h2::before {
-      @apply inline-block text-red-700 mr-2 text-lg;
-      content: "##";
+      @apply my-4 text-xl font-bold dark:text-white mt-10 text-red-700;
     }
     h3,
     h4,
     h5,
     h6 {
-      @apply my-4 font-bold dark:text-white;
-    }
-    h3::before {
-      @apply inline-block text-red-700 mr-2 text-lg;
-      content: "###";
-    }
-    h4::before {
-      @apply inline-block text-red-700 mr-2 text-lg;
-      content: "####";
+      @apply my-4 font-bold mt-8 text-lg;
     }
     :not(pre) > code {
       @apply whitespace-nowrap rounded border bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
@@ -156,10 +140,10 @@ a {
   border-color: rgba(59, 222, 255, 0.5) !important;
 }
 [data-callout-type="note"] [data-callout-title] {
-  color: #00bbc8;
+  color: #008b95;
 }
 [data-callout-type="note"] [data-callout-body] {
-  color: #00bbc8;
+  color: #008b95;
 }
 [data-callout-type="tip"] {
   border-color: rgba(34, 197, 94, 0.5) !important;

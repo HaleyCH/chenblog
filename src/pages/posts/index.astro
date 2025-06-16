@@ -1,3 +1,12 @@
 ---
-return Astro.redirect("/posts/1");
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
 ---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main class="flex items-center justify-center">
+    <script>
+      window.location.replace("/posts/1");
+    </script>
+  </main>
+</Layout>

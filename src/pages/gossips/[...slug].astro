@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import PasswordWrapper from "../../components/PasswordWrapper.astro";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate, getDisplayPosts } from "../../lib/utils";
 
@@ -40,8 +41,10 @@ const nextPost =
     <h1 class="mb-5 text-2xl font-bold">
       {post.data.title}
     </h1>
-    <article class="prose prose-zinc max-w-none break-words">
-      <Content />
+    <article id="article" class="prose prose-zinc max-w-none break-words">
+      <PasswordWrapper password={post.data.password}>
+        <Content />
+      </PasswordWrapper>
     </article>
   </main>
 </Layout>

@@ -11,11 +11,18 @@ import remarkCallout from "@r4ai/remark-callout";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 
+import expressiveCode from "astro-expressive-code";
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
   base: "",
-  integrations: [mdx(), sitemap(), tailwind({ nesting: true })],
+  integrations: [
+    expressiveCode(),
+    mdx(),
+    sitemap(),
+    tailwind({ nesting: true }),
+  ],
   markdown: {
     shikiConfig: {
       themes: {

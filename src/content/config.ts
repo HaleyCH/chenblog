@@ -11,7 +11,13 @@ const posts = defineCollection({
     pinned: z.boolean().default(false),
     categorise: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
+    password: z.string().optional(),
   }),
+});
+
+const assets = defineCollection({
+  type: "content",
+  // 不需要 schema，或 schema 只校验 body
 });
 
 const gossips = defineCollection({
@@ -25,7 +31,8 @@ const gossips = defineCollection({
     pinned: z.boolean().default(false),
     categorise: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
+    password: z.string().optional(),
   }),
 });
 
-export const collections = { posts, gossips };
+export const collections = { posts, gossips, assets };
